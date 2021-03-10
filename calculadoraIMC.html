@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>CV Jonatan</title>
+    <title>Calculadora IMC</title>
     <link rel="stylesheet" href="style.css">
     
   </head>
@@ -13,27 +13,63 @@
     
     <div class="iMC">
       <div class="oper">
-        <form action="opera" onsubmit="myFunction()">
+        
           <h3> Calculadora IMC </h3>
-        <p> Ingresa tu peso: </p>
-        <input type="text" name="peso" size="10">
-        <p> Ingresa tu estatura: </p>
-        <input type="text" name="estatura" size="10">
+        <p> Ingresa tu peso (kg): </p>
+        <input id="peso" type="text" onkeyup="mifun2()" name="peso" size="10">
+        
+        <p> Ingresa tu estatura (m): </p>
+        <input id="estatura" type="text" onkeyup="mifun3()" name="estatura" size="10">
         <p>
-        <input type="submit" value="Enviar">
-        <input type="reset" value="Borrar">
+        <button onclick="myFunction()">Enviar</button>
+        <input type="reset"  value="Borrar">
+        
         </p>
         
-        </form>
+        
         <p id="espacio"></p>
       </div>
           
     </div>
     <script type="text/javascript">
+     
+        
       function myFunction() {
+        
+        
+        var peso = mifun2();
+        var estatura = mifun3();
+        var mic_ = peso / (estatura * estatura);
+        var mic = Math.round(mic_ *100)/100
+        var smics;
+        if (mic <= 18.5){
+          smics = "bajo peso.";
+        }else if ( mic > 18.5 && mic < 25){
+          smics = "saludable.";
+        }else if (mic >= 25 && mic < 30){
+          smics = "sobrepeso.";
+        }else if(mic >= 30 && mic < 35){
+          smics = "obesidad grado 1.";
+        }else if(mic >= 35 && mic < 40){
+          smics = "obesidad grado 2.";
+        }else if(mic >= 40){
+          smics = "obesidad mórbida.";
+        }else{
+          smics = "Corrige datos de peso o estatura.";
+        }
         document.getElementById("espacio").innerHTML = 
-        'The first paragraph (index 0) inside "main" is: ';
+        'Tu indice de masa corporal es: ' + mic + ' y es considerado ' + smics;
       }
+      function mifun2() {
+        var peso = document.getElementById("peso").value;
+        return peso;
+      }
+      function mifun3() {
+        var estatura = document.getElementById("estatura").value;
+        return estatura;
+      }
+
+
     </script>
     
   </body>
